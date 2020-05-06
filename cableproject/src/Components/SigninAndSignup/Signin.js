@@ -19,49 +19,36 @@ function Signin() {
             }))
     }
 
-    const onformSubmition = ()=>
+    const onformSubmition = (e)=>
     {
-        if(state.username.length && state.passcode.length)
+        e.preventDefault();
+        const payload = {
+            username :state.username,
+            passcode :state.passcode
+        }
+       console.log(state.username);
+       axios.post('http://localhost:8089/controller/test',payload)
+       .then(response=>
         {
-            const payload ={
-                "username":state.username,
-                "passcode":state.passcode
-            }
-            axios.post("http://192.168.1.160:8089/controller/test",payload)
-            .then(function(response)
-            {
-                console.log("success");
-                if(response.data.code === 200)
-                {
-                    setState(prevState =>
-                        ({
-                          ...prevState,
-                          'successmessage':'Logged in Sucess'      
-                        }))
-                    this.props.showError(null);
-                }
-            }).catch(function(error)
-            {
-                console.log(error);
-            });
-        }
-        else{
-            this.props.showError("Please provide valid username and password");
-        }
+            console.log(response.data)
+        }).catch(error => {
+            console.log("Inside");
+            console.log(error);
+          });
     }
     return (
         <div>
             <div>
                 <h3>Login</h3>
             </div>
-            <form>
+            <form onSubmit ={onformSubmition}>
                 <input type="text" id="username" value = {state.username} onChange = {handleChange}></input>
                 <br></br>
                 <br></br>
                 <input type="password" id="passcode" value = {state.passcode} onChange = {handleChange}></input>
                 <br></br>
                 <br></br>
-                <button type="submit" onClick = {onformSubmition}>Login</button>
+                <button type="submit">Login</button>
                 <button type="reset" value="reset" className="buttonpadding">Reset</button>
             </form>
         </div>
