@@ -6,7 +6,7 @@ function Signin() {
         {
             username:"",
             passcode:"",
-            successmessage:null
+            confirmpassword:""
         }
     )
     const handleChange = (e)=>
@@ -18,16 +18,42 @@ function Signin() {
                 [id]:value
             }))
     }
-
+    const passwordconfirm = (e)=>
+    {
+        e.preventDefault();
+        setState(
+            {
+                confirmpassword :e.target.value,
+                passcode:state.passcode,
+                username:state.username
+            })
+            if (e.target.value === state.passcode) {
+                console.log("You got it")
+            } else {
+                console.log(e.target.value);
+                console.log(state.passcode);
+                console.log(state.username);
+                console.log("OOOPS! check and change your confirmation password or password fields")
+            }
+    }
+    const onreset = () =>
+    {
+      setState(
+          {
+            username :"",
+            passcode :""
+          }
+      )  
+    }
     const onformSubmition = (e)=>
     {
         e.preventDefault();
         const payload = {
             username :state.username,
-            passcode :state.passcode
+            passcode :state.passcode,
+            confirmpassword:state.confirmpassword
         }
-       console.log(state.username);
-       axios.post('http://localhost:8089/controller/test',payload)
+       axios.post('http://localhost:8089/controller/registartion',payload)
        .then(response=>
         {
             console.log(response.data)
@@ -42,14 +68,17 @@ function Signin() {
                 <h3>Login</h3>
             </div>
             <form onSubmit ={onformSubmition}>
-                <input type="text" id="username" value = {state.username} onChange = {handleChange}></input>
+                <input type="text" id="username" value = {state.username} onChange = {handleChange} placeholder="Username"></input>
                 <br></br>
                 <br></br>
-                <input type="password" id="passcode" value = {state.passcode} onChange = {handleChange}></input>
+                <input type="password" id="passcode" value = {state.passcode} onChange = {handleChange} placeholder="Password"></input>
+                <br></br>
+                <br></br>
+                <input type="password" id="confirmpassword" value = {state.confirmpassword} onChange = {passwordconfirm} placeholder="Confirmpassword"></input>
                 <br></br>
                 <br></br>
                 <button type="submit">Login</button>
-                <button type="reset" value="reset" className="buttonpadding">Reset</button>
+                <button type="reset" value="reset" className="buttonpadding" onClick={onreset}>Reset</button>
             </form>
         </div>
     )
