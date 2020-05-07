@@ -1,7 +1,7 @@
-import React,{useState} from 'react'
+import React, {useState}from 'react'
 import './Signin.css'
 import axios from "axios"
-function Signin() {
+function Signup() {
     const [state, setState] = useState(
         {
             username:"",
@@ -65,20 +65,23 @@ function Signin() {
     return (
         <div>
             <div>
-                <h3>Signin</h3>
+                <h3>Signup</h3>
             </div>
-            <form onSubmit ={onformSubmition}>
+          <form onSubmit ={onformSubmition}>
                 <input type="text" id="username" value = {state.username} onChange = {handleChange} placeholder="Username"></input>
                 <br></br>
                 <br></br>
                 <input type="password" id="passcode" value = {state.passcode} onChange = {handleChange} placeholder="Password"></input>
                 <br></br>
                 <br></br>
-                <button type="submit" disabled ={false}>Signin</button>
+                <input type="password" id="confirmpassword" value = {state.confirmpassword} onChange = {passwordconfirm} placeholder="Confirmpassword"></input>
+                <br></br>
+                <br></br>
+                <button type="submit">Signup</button>
                 <button type="reset" value="reset" className="buttonpadding" onClick={onreset}>Reset</button>
             </form>
         </div>
     )
 }
 
-export default Signin
+export default Signup
