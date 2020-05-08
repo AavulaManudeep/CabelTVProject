@@ -1,7 +1,7 @@
 import React, {useState}from 'react'
 import './Signin.css'
 import axios from "axios"
-function Signup() {
+function Signup(props) {
     const [state, setState] = useState(
         {
             username:"",

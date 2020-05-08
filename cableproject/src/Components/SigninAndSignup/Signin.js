@@ -1,7 +1,10 @@
 import React,{useState} from 'react'
 import './Signin.css'
 import axios from "axios"
-function Signin() {
+import { LoginContext } from '../LoginContext'
+import history from '../History'
+function Signin(props) {
+
     const [state, setState] = useState(
         {
             username:"",
@@ -18,24 +21,6 @@ function Signin() {
                 [id]:value
             }))
     }
-    const passwordconfirm = (e)=>
-    {
-        e.preventDefault();
-        setState(
-            {
-                confirmpassword :e.target.value,
-                passcode:state.passcode,
-                username:state.username
-            })
-            if (e.target.value === state.passcode) {
-                console.log("You got it")
-            } else {
-                console.log(e.target.value);
-                console.log(state.passcode);
-                console.log(state.username);
-                console.log("OOOPS! check and change your confirmation password or password fields")
-            }
-    }
     const onreset = () =>
     {
       setState(
@@ -45,6 +30,15 @@ function Signin() {
           }
       )  
     }
+
+    const {target,test} = React.useContext(LoginContext);
+    console.log(target.loginstate);
+    const signinsuccess = (e) =>
+    {
+        console.log(test);
+        test.loginfunction();
+    }
+
     const onformSubmition = (e)=>
     {
         e.preventDefault();
@@ -53,15 +47,25 @@ function Signin() {
             passcode :state.passcode,
             confirmpassword:state.confirmpassword
         }
-       axios.post('http://localhost:8089/controller/registartion',payload)
+       axios.post('http://localhost:8089/controller/login',payload)
        .then(response=>
         {
-            console.log(response.data)
+            if(response.data === "Success")
+            {
+                console.log(response.data)
+                signinsuccess();
+                if(target.loginstate)
+                    history.push("/home")
+                else
+                    history.push("/signin")
+            }
+            console.log(target);
         }).catch(error => {
             console.log("Inside");
             console.log(error);
           });
     }
+    console.log(props.target);
     return (
         <div>
             <div>
