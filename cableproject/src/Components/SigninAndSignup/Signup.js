@@ -1,6 +1,8 @@
 import React, {useState}from 'react'
 import './Signin.css'
 import axios from "axios"
+import { LoginContext } from '../LoginContext';
+import history from '../History';
 function Signup(props) {
     const [state, setState] = useState(
         {
@@ -9,6 +11,14 @@ function Signup(props) {
             confirmpassword:""
         }
     )
+    const {target,test} = React.useContext(LoginContext);
+    console.log(target);
+    const signupsuccess = (e) =>
+    {
+        console.log(test);
+        test.loginfunction();
+        console.log(target);
+    }
     const handleChange = (e)=>
     {
         const {id,value} = e.target;
@@ -56,10 +66,24 @@ function Signup(props) {
        axios.post('http://localhost:8089/controller/registartion',payload)
        .then(response=>
         {
+            if(response.data === "Registerd")
+            {
+                signupsuccess()
+                if(!target)
+                {
+                    console.log("Inside Signup")
+                    history.push("/home")
+                }
+                else
+                {
+                    history.push("/signup")
+                }
+            }
             console.log(response.data)
         }).catch(error => {
             console.log("Inside");
             console.log(error);
+            history.push("/signin")
           });
     }
     return (
