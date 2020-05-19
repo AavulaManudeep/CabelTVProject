@@ -8,7 +8,11 @@ function Signup(props) {
         {
             username:"",
             passcode:"",
-            confirmpassword:""
+            confirmpassword:"",
+            usernameError:"",
+            passwordError:"",
+            confirmpasswordError:""
+
         }
     )
     const {target,test} = React.useContext(LoginContext);
@@ -27,6 +31,49 @@ function Signup(props) {
                 ...prevState,
                 [id]:value
             }))
+        console.log([id]); 
+        if([id][0]==="username" )
+        {
+            
+            if(value==='')
+            {
+                console.log("Invalid");
+                setState(prevState =>
+                    ({
+                        ...prevState,
+                        usernameError:"*username cannot be empty"
+                    })) 
+            } 
+            else{
+                console.log("Valid");
+                setState(prevState =>
+                    ({
+                        ...prevState,
+                        usernameError:""
+                    })) 
+            }
+        }
+        if([id][0]==="passcode" )
+        {
+            
+            if(value==='')
+            {
+                console.log("Invalid");
+                setState(prevState =>
+                    ({
+                        ...prevState,
+                        passwordError:"*password cannot be empty"
+                    })) 
+            } 
+            else{
+                console.log("Valid");
+                setState(prevState =>
+                    ({
+                        ...prevState,
+                        passwordError:""
+                    })) 
+            }
+        }
     }
     const passwordconfirm = (e)=>
     {
@@ -39,7 +86,23 @@ function Signup(props) {
             })
             if (e.target.value === state.passcode) {
                 console.log("You got it")
+                setState(
+                    {
+                        passcode:state.passcode,
+                        username:state.username,
+                        confirmpasswordError : ""
+                    }
+                )
+                
             } else {
+
+                setState(
+                    {
+                        passcode:state.passcode,
+                        username:state.username,
+                        confirmpasswordError : "*password doesn't match"
+                    }
+                )
                 console.log(e.target.value);
                 console.log(state.passcode);
                 console.log(state.username);
@@ -50,18 +113,59 @@ function Signup(props) {
     {
       setState(
           {
-            username :"",
-            passcode :""
+            username:"",
+            passcode:"",
+            confirmpassword:"",
+            usernameError:"",
+            passwordError:"",
+            confirmpasswordError:""
           }
       )  
     }
     const onformSubmition = (e)=>
     {
         e.preventDefault();
-        const payload = {
-            username :state.username,
-            passcode :state.passcode,
-            confirmpassword:state.confirmpassword
+        let payload={};
+        if(state.usernameError==='' && state.confirmpasswordError ==='' 
+        && state.passwordError==='' && state.passcode!=='')
+        {
+            payload = {
+                username :state.username,
+                passcode :state.passcode,
+                confirmpassword:state.confirmpassword
+            }
+        }
+        else if(state.passcode==='' && state.confirmpassword ==='')
+        {
+            setState(prevState =>
+                ({
+                    ...prevState,
+                    passwordError:"*Password cannot be empty",
+                    confirmpasswordError:"*Confirmpassword cannot be empty"
+                })) 
+            payload={};
+        }
+        else if(state.username ===''){
+            setState(prevState =>
+                ({
+                    ...prevState,
+                    usernameError:"*username cannot be empty"
+                    
+                })) 
+            payload={};
+        }
+        else if(state.confirmpassword ===''){
+            setState(prevState =>
+                ({
+                    ...prevState,
+                    confirmpasswordError:"*password doesn't match"
+                })) 
+            payload={};
+        }
+        else
+        {
+            console.log("Hey I am here")
+            payload={};
         }
        axios.post('http://localhost:8089/controller/registartion',payload)
        .then(response=>
@@ -83,7 +187,7 @@ function Signup(props) {
         }).catch(error => {
             console.log("Inside");
             console.log(error);
-            history.push("/signin")
+            history.push("/signup")
           });
     }
     return (
@@ -93,14 +197,11 @@ function Signup(props) {
             </div>
           <form onSubmit ={onformSubmition}>
                 <input type="text" id="username" value = {state.username} onChange = {handleChange} placeholder="Username"></input>
-                <br></br>
-                <br></br>
+                <p className="error">{state.usernameError}</p>
                 <input type="password" id="passcode" value = {state.passcode} onChange = {handleChange} placeholder="Password"></input>
-                <br></br>
-                <br></br>
+                <p className="error">{state.passwordError}</p>
                 <input type="password" id="confirmpassword" value = {state.confirmpassword} onChange = {passwordconfirm} placeholder="Confirmpassword"></input>
-                <br></br>
-                <br></br>
+                <p className="error">{state.confirmpasswordError}</p>
                 <button type="submit">Signup</button>
                 <button type="reset" value="reset" className="buttonpadding" onClick={onreset}>Reset</button>
             </form>
