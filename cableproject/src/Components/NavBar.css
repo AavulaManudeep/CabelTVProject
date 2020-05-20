@@ -15,5 +15,10 @@ nav
     list-style: none;
     width: 40%;
     justify-content: space-around;
+    float: inline-end;
+}
+.logo 
+{
+    float: left;
 }
 

@@ -10,8 +10,9 @@ input{
 button
 {
   font-size: xx-large;
-  border-radius: 10px;
+  border-radius: 30px;
   outline: none;
+  background-color: cornsilk;
 }
 .error
 {

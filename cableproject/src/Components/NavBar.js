@@ -38,7 +38,7 @@ function NavBar(props) {
     }
     return (
         <nav>
-            <h3>Logo</h3>
+            <h3 className="logo">Logo</h3>
             <ul className= "nav-links">
                {home}
                {about}
