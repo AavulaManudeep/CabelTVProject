@@ -1,6 +1,7 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
 import {Container, Row, Col,} from 'react-bootstrap';
+import CustomerPlandetails from './CustomerComponents/CustomerPlandetails';
 
 function Home() {
 
@@ -90,10 +91,10 @@ function Home() {
             }
           }}
           />
-              </Col>
-            </Row>
+            </Col>
+          </Row>
           </Container>
-          
+          <CustomerPlandetails></CustomerPlandetails>
         </div>
     )
 }

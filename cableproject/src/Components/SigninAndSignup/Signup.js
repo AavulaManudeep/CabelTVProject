@@ -31,7 +31,7 @@ function Signup(props) {
                 ...prevState,
                 [id]:value
             }))
-        console.log([id]); 
+        console.log(e.target.value); 
         if([id][0]==="username" )
         {
             
@@ -55,7 +55,7 @@ function Signup(props) {
         }
         if([id][0]==="passcode" )
         {
-            
+            console.log(value);
             if(value==='')
             {
                 console.log("Invalid");
@@ -74,7 +74,31 @@ function Signup(props) {
                     })) 
             }
         }
+        if([id][0]==="passcode" && state.confirmpassword!=='')
+        {
+         checkonconfirmpassword(e.target.value);
+        }
     }
+    console.log(state.passcode);
+    const checkonconfirmpassword = (value)=>
+    {
+        if(value!==state.confirmpassword)
+        {
+            setState(prevState =>
+                ({
+                    ...prevState,
+                    confirmpasswordError : "*password doesn't match"
+            }))
+        }
+        else{
+            setState(prevState =>
+                ({
+                    ...prevState,
+                    confirmpasswordError : ""
+            }))
+        }
+    }
+    
     const passwordconfirm = (e)=>
     {
         e.preventDefault();
@@ -86,22 +110,24 @@ function Signup(props) {
             })
             if (e.target.value === state.passcode) {
                 console.log("You got it")
-                setState(
-                    {
+                setState( prevState =>
+                    ({
+                        ...prevState,
                         passcode:state.passcode,
                         username:state.username,
                         confirmpasswordError : ""
-                    }
+                    })
                 )
                 
             } else {
 
-                setState(
-                    {
+                setState(prevState =>
+                    ({
+                        ...prevState,
                         passcode:state.passcode,
                         username:state.username,
                         confirmpasswordError : "*password doesn't match"
-                    }
+                    })
                 )
                 console.log(e.target.value);
                 console.log(state.passcode);
@@ -109,6 +135,7 @@ function Signup(props) {
                 console.log("OOOPS! check and change your confirmation password or password fields")
             }
     }
+   
     const onreset = () =>
     {
       setState(
@@ -126,8 +153,11 @@ function Signup(props) {
     {
         e.preventDefault();
         let payload={};
-        if(state.usernameError==='' && state.confirmpasswordError ==='' 
-        && state.passwordError==='' && state.passcode!=='')
+        console.log(state.confirmpasswordError);
+        console.log(state.usernameError);
+        console.log(state.passwordError);
+        if(state.username !=='' && state.confirmpasswordError ==='' 
+         && state.passcode !=='')
         {
             payload = {
                 username :state.username,
