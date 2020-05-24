@@ -18,11 +18,10 @@ function NavBar(props) {
     const func =(e) =>
     {
         test.loginfunction();
-        console.log(target.loginstate);
+        console.log(target);
     } 
-    console.log(target.loginstate);
     console.log(target);
-    if(target.loginstate)
+    if(target)
     {
         home = <Link style={naveStyle} to ='/home'> <li>Home</li> </Link>
         logout = <Link style={naveStyle}  to ='/signin'> <li onClick={func}> Logout</li></Link>
@@ -30,16 +29,16 @@ function NavBar(props) {
     }
     else
     {
-        signin= <Link style={naveStyle} to="/signin">
+        signin = <Link style={naveStyle} to="/signin">
         <li> Signin</li>
         </Link>
-        signup=<Link style={naveStyle} to ='/signup'>
+        signup = <Link style={naveStyle} to ='/signup'>
         <li>Signup</li>
         </Link>
     }
     return (
         <nav>
-            <h3>Logo</h3>
+            <h3 className="logo">Logo</h3>
             <ul className= "nav-links">
                {home}
                {about}

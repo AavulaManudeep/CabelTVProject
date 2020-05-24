@@ -12,25 +12,36 @@ function SigninandSignUp(props) {
     const {target,test} = React.useContext(LoginContext);
     let about = null
     let home = null
-    if(target.loginstate)
+    let signin = null;
+    let signup = null;
+    let other = null;
+    if(target)
     {
         about = <Route path ="/about" component= {About}></Route>
-        home = <Route path ="/home" component= {Home}></Route>   
+        home = <Route path ="/home" component= {Home}></Route> 
+        other = <Route path ="/*"  component= {Home}></Route> 
+        //signin = <Route path ="/" exact component= {Home}></Route> 
     }
-    console.log(target.loginstate);
+    else{
+       // hom = <Route path ="/" exact component= {Signin}></Route>
+        signin = <Route path ="/signin" component = {Signin}></Route>
+        signup = <Route path ="/signup" component= {Signup}></Route>
+        other  = <Route path ="/*"  component= {Signin}></Route> 
+
+    }
+    console.log(target);
     return (
         <div>
             <Router history = {history}>
                 <NavBar></NavBar>
                 <Switch>
-                <Route path ="/" exact component= {Signin}></Route>
-                <Route path ="/signin" component = {Signin}></Route>
-                <Route path ="/signup" component= {Signup}></Route>
+                {signin}
+                {signup}
                 {about}
                 {home}
-                <Route path ="/*"  component= {Signin}></Route>
+                {other}
                 </Switch>
-                {console.log(target.loginstate)}
+                {console.log(target)}
             </Router>
         </div>
     )

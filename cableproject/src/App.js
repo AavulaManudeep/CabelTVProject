@@ -3,14 +3,17 @@ import './App.css';
 import SigninandSignUp from './Components/SigninAndSignup/SigninandSignUp';
 import { LoginContextProvider } from './Components/LoginContext';
 function App() {
+
+  console.log("Inside App.js");
   const [loginstate, setstate] = useState(
     false
 )
 const loginfunction = (e) =>
 {
-       setstate({
-         loginstate:!loginstate
-       })
+    console.log("Inside LoginFunction");
+       setstate(
+         !loginstate
+       )
 }
   return (
     <div className="App">

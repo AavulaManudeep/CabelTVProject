@@ -32,11 +32,12 @@ function Signin(props) {
     }
 
     const {target,test} = React.useContext(LoginContext);
-    console.log(target.loginstate);
+    console.log(target);
     const signinsuccess = (e) =>
     {
         console.log(test);
         test.loginfunction();
+        console.log(target);
     }
 
     const onformSubmition = (e)=>
@@ -54,10 +55,17 @@ function Signin(props) {
             {
                 console.log(response.data)
                 signinsuccess();
-                if(target.loginstate)
+                console.log(target);
+                if(!target)
+                {
+                    console.log("Inside history");
                     history.push("/home")
+                }
                 else
+                {
+                    console.log("Inside /Signin history");
                     history.push("/signin")
+                }
             }
             console.log(target);
         }).catch(error => {
@@ -65,7 +73,6 @@ function Signin(props) {
             console.log(error);
           });
     }
-    console.log(props.target);
     return (
         <div>
             <div>
