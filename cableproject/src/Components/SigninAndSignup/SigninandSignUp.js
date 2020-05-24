@@ -17,7 +17,6 @@ function SigninandSignUp(props) {
     let other = null;
     if(target)
     {
-    
         about = <Route path ="/about" component= {About}></Route>
         home = <Route path ="/home" component= {Home}></Route> 
         other = <Route path ="/*"  component= {Home}></Route> 
