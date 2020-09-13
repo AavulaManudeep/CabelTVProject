@@ -45,15 +45,17 @@ function Signin(props) {
         e.preventDefault();
         const payload = {
             username :state.username,
-            passcode :state.passcode,
-            confirmpassword:state.confirmpassword
+            password :state.passcode,
+            //confirmpassword:state.confirmpassword
         }
        axios.post('http://localhost:8089/controller/login',payload)
        .then(response=>
         {
-            if(response.data === "Success")
+            console.log(response.headers['Authorization'])
+            if(response.data !== "Success")
             {
                 console.log(response.data)
+                localStorage.setItem('Authorization',response.data);
                 signinsuccess();
                 console.log(target);
                 if(!target)

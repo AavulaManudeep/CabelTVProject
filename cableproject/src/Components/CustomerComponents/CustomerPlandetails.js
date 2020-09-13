@@ -5,12 +5,14 @@ import UserPlanDetailsRecord from './UserPlanDetailsRecord';
 
 function CustomerPlandetails(props) {
 
-
+    //let header = new Headers()
+   // header.append("Authorization",localStorage.getItem('Authorization'));
     const [state,setState] = useState(
         {userDetails:[]})
    let ref = useRef(state)
     useEffect(()=>{  
-       axios.get("http://localhost:8089/customerinfo/retrieveall")
+    axios.get("http://localhost:8089/customerinfo/retrieveall",{headers:
+       {'Authorization': localStorage.getItem('Authorization')}})
         .then(response =>
             {
                 console.log(response.data)

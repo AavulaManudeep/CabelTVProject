@@ -4,7 +4,7 @@ import {Container, Row, Col,} from 'react-bootstrap';
 import CustomerPlandetails from './CustomerComponents/CustomerPlandetails';
 
 function Home() {
-
+  
   const state = {
     labels:["To be collected ","Collected"],
     datasets :[{
