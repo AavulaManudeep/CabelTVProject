@@ -20,5 +20,9 @@ nav
 .logo 
 {
     float: left;
+    color: darkgreen;
 }
-
+.pagnation
+{
+   background-color:white;
+}

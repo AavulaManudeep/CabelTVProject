@@ -1,10 +1,12 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
+import {withRouter} from 'react-router-dom'
 import {Container, Row, Col,} from 'react-bootstrap';
 import CustomerPlandetails from './CustomerComponents/CustomerPlandetails';
+import CustomerDetailEntryForm from './CustomerComponents/CustomerDetailEntryForm';
 
-function Home() {
-  
+function Home(props) {
+  console.log(props)
   const state = {
     labels:["To be collected ","Collected"],
     datasets :[{
@@ -94,7 +96,7 @@ function Home() {
             </Col>
           </Row>
           </Container>
-          <CustomerPlandetails></CustomerPlandetails>
+          <CustomerPlandetails props = {props}></CustomerPlandetails>
         </div>
     )
 }

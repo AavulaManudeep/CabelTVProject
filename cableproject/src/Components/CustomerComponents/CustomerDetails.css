@@ -1,0 +1,14 @@
+.userinfo button :hover
+{
+    cursor: pointer;
+    background-color:green;
+}
+button 
+{
+    background-color: green;
+    border-radius: 20px;
+}
+.pagnation
+{
+    color: black;
+}

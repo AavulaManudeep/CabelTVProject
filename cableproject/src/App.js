@@ -8,11 +8,15 @@ function App() {
   const [loginstate, setstate] = useState(
     false
 )
-const loginfunction = (e) =>
+if(localStorage.getItem("login")==null)
 {
+  localStorage.setItem("login",false) 
+}
+const loginfunction = (e) =>
+{  
     console.log("Inside LoginFunction");
        setstate(
-         !loginstate
+         localStorage.getItem("login")
        )
 }
   return (

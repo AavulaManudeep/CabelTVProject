@@ -1,6 +1,7 @@
 import React from 'react'
 import "./NavBar.css"
 import {Link} from "react-router-dom";
+import {withRouter} from 'react-router-dom'
 import { LoginContextConsumer, LoginContext } from './LoginContext';
 import Signin from './SigninAndSignup/Signin';
 function NavBar(props) {
@@ -14,9 +15,11 @@ function NavBar(props) {
     let about = null
     let signin = null
     let signup = null
+    let customform = null
     const {target ,test} =  React.useContext(LoginContext);
     const func =(e) =>
     {
+        localStorage.removeItem("login")
         test.loginfunction();
         console.log(target);
     } 
@@ -26,6 +29,7 @@ function NavBar(props) {
         home = <Link style={naveStyle} to ='/home'> <li>Home</li> </Link>
         logout = <Link style={naveStyle}  to ='/signin'> <li onClick={func}> Logout</li></Link>
         about = <Link style={naveStyle} to ='/about'> <li>About</li> </Link>
+        customform = <Link style={naveStyle} to ='/customerform'> <li>NewCustomForm</li> </Link>
     }
     else
     {
@@ -41,6 +45,7 @@ function NavBar(props) {
             <h3 className="logo">Logo</h3>
             <ul className= "nav-links">
                {home}
+               {customform}
                {about}
                {logout}
                {signin}
@@ -51,4 +56,4 @@ function NavBar(props) {
    
 }
 
-export default NavBar
+export default withRouter(NavBar)

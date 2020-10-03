@@ -7,6 +7,7 @@ import About from '../About';
 import Home from '../Home';
 import history from '../History';
 import { LoginContext } from '../LoginContext';
+import CustomerDetailEntryForm from '../CustomerComponents/CustomerDetailEntryForm';
 function SigninandSignUp(props) {
 
     const {target,test} = React.useContext(LoginContext);
@@ -15,11 +16,14 @@ function SigninandSignUp(props) {
     let signin = null;
     let signup = null;
     let other = null;
+    let customerform = null;
     if(target)
     {
         about = <Route path ="/about" component= {About}></Route>
         home = <Route path ="/home" component= {Home}></Route> 
-        other = <Route path ="/*"  component= {Home}></Route> 
+        customerform = <Route path ="/customerform" component= {CustomerDetailEntryForm}></Route> 
+        other = <Route path ="/*"  component= {Home}></Route>
+
         //signin = <Route path ="/" exact component= {Home}></Route> 
     }
     else{
@@ -39,6 +43,7 @@ function SigninandSignUp(props) {
                 {signup}
                 {about}
                 {home}
+                {customerform}
                 {other}
                 </Switch>
                 {console.log(target)}
