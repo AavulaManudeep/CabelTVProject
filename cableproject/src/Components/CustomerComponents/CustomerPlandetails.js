@@ -20,7 +20,7 @@ const CustomerPlandetails=({props}) => {
     }
    let ref = useRef(state)
     useEffect(()=>{  
-    axios.get("http://ec2-3-16-21-160.us-east-2.compute.amazonaws.com:8089/customerinfo/retrieveall",{headers:
+    axios.get("http://ec2-18-222-133-226.us-east-2.compute.amazonaws.com:8089/customerinfo/retrieveall",{headers:
        {'Authorization': localStorage.getItem('Authorization')}})
         .then(response =>
             {

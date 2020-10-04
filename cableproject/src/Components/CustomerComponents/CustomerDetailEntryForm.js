@@ -58,7 +58,7 @@ function CustomerDetailEntryForm(props) {
         {
             'Authorization': localStorage.getItem('Authorization')
         }
-        axios.post("http://ec2-3-16-21-160.us-east-2.compute.amazonaws.com:8089/customerinfo/insert/userplandetails",
+        axios.post("http://ec2-18-191-141-142.us-east-2.compute.amazonaws.com:8089/customerinfo/insert/userplandetails",
         customerPalnPayload,{headers:headers}
             ).then(
             response =>
@@ -76,7 +76,7 @@ function CustomerDetailEntryForm(props) {
         
         console.log(customerPalnPayload)
 
-        axios.post("http://ec2-3-16-21-160.us-east-2.compute.amazonaws.com:8087/customerprofile/insertuserdetails",customerDetailPayload)
+        axios.post("http://ec2-18-222-133-226.us-east-2.compute.amazonaws.com:8087/customerprofile/insertuserdetails",customerDetailPayload)
         .then(response =>
             {
                     console.log(response.data)
