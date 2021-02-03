@@ -46,7 +46,6 @@ function NavBar(props) {
             <ul className= "nav-links">
                {home}
                {customform}
-               {about}
                {logout}
                {signin}
                {signup} 

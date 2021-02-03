@@ -197,7 +197,7 @@ function Signup(props) {
             console.log("Hey I am here")
             payload={};
         }
-       axios.post('http://ec2-18-222-133-226.us-east-2.compute.amazonaws.com:8089/controller/registartion',payload)
+       axios.post('http://ec2-3-23-112-51.us-east-2.compute.amazonaws.com:8089/controller/registartion',payload)
        .then(response=>
         {
             if(response.data === "Registerd")

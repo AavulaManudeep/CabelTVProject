@@ -1,16 +1,11 @@
 import React,{useState,useEffect,useRef} from 'react';
-import Table from 'react-bootstrap/Table';
 import axios from 'axios';
-import UserPlanDetailsRecord from './UserPlanDetailsRecord';
 import paginationFactory from "react-bootstrap-table2-paginator"
-import {Modal,Button} from "react-bootstrap"
-import history from "../History"
 import BootstrapTable from 'react-bootstrap-table-next'
+import filterFactory,{textFilter} from 'react-bootstrap-table2-filter'
 import"./CustomerDetails.css"
 import PropTypes from 'prop-types'
-import {BrowserRouter as Router,Route} from 'react-router-dom';
-import About from '../About'
-import { LoginContextProvider } from '../LoginContext';
+
 const CustomerPlandetails=({props}) => {
     const [state,setState] = useState(
         {userDetails:[]})
@@ -20,7 +15,7 @@ const CustomerPlandetails=({props}) => {
     }
    let ref = useRef(state)
     useEffect(()=>{  
-    axios.get("http://ec2-18-222-133-226.us-east-2.compute.amazonaws.com:8089/customerinfo/retrieveall",{headers:
+    axios.get("http://localhost:8089/customerinfo/retrieveall",{headers:
        {'Authorization': localStorage.getItem('Authorization')}})
         .then(response =>
             {
@@ -43,10 +38,10 @@ const CustomerPlandetails=({props}) => {
 
     const columns =
     [
-        {dataField:"customerId",text:"Customer ID"},
-        {dataField:"customerFirstName",text:"Name"},
-        {dataField:"customerCurrentPlan",text:"Current Plan"},
-        {dataField:"amountDue",text:"Due Amount"}
+        {dataField:"customerId",text:"Customer ID",sort:true,filter:textFilter()},
+        {dataField:"customerFirstName",text:"Name",sort:true},
+        {dataField:"customerCurrentPlan",text:"Current Plan",sort:true},
+        {dataField:"amountDue",text:"Due Amount",sort:true}
     ]
 
     // const getCustomerData = ()=>
@@ -95,7 +90,6 @@ const CustomerPlandetails=({props}) => {
         //    <UserPlanDetailsRecord user={state.userDetails} key = {state.userDetails}></UserPlanDetailsRecord>
         // </div>
         <div>
-            About
             <div className ="pagnation">
             <BootstrapTable 
             keyField="customerId"
@@ -103,7 +97,12 @@ const CustomerPlandetails=({props}) => {
             columns={columns}
             pagination={paginationFactory()}
             rowEvents={rowEvents}
-            ></BootstrapTable>
+            search
+            striped
+            hover
+            filter = {filterFactory()}
+            >
+            </BootstrapTable>
             </div>
         </div>
     )

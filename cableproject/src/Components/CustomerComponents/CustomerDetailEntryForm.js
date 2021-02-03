@@ -76,7 +76,7 @@ function CustomerDetailEntryForm(props) {
         
         console.log(customerPalnPayload)
 
-        axios.post("http://ec2-18-222-133-226.us-east-2.compute.amazonaws.com:8087/customerprofile/insertuserdetails",customerDetailPayload)
+        axios.post("http://ec2-3-23-112-51.us-east-2.compute.amazonaws.com:8087/customerprofile/insertuserdetails",customerDetailPayload)
         .then(response =>
             {
                     console.log(response.data)
@@ -138,59 +138,59 @@ function CustomerDetailEntryForm(props) {
         <div>
             <Form onSubmit = {onFormSubmit}>
                 <Form.Row>
-                    <Form.Group controlId="formFirstName">
+                    <Form.Group >
                         <Form.Label>First Name</Form.Label>
                         <Form.Control placeholder = "Enter First Name" onChange = {handelChange} value = {formObj.firstName} id = "firstName"></Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="formLasttName">
+                    <Form.Group >
                         <Form.Label>Last Name</Form.Label>
                         <Form.Control placeholder = "Enter Last Name" onChange = {handelChange} value = {formObj.lastName} id = "lastName"></Form.Control>
                     </Form.Group>
                 </Form.Row>
-                <Form.Group controlId="formAddress">
+                <Form.Group >
                         <Form.Label>Address</Form.Label>
                         <Form.Control placeholder = "Enter Address" onChange = {handelChange} value = {formObj.address} id = "address"></Form.Control>
                 </Form.Group>
-                <Form.Group controlId="formAddress2">
+                <Form.Group >
                         <Form.Label>Address2</Form.Label>
                         <Form.Control placeholder = "Enter Address" onChange = {handelChange} value = {formObj.address2} id = "address2"></Form.Control>
                 </Form.Group>
                 <Form.Row>
-                <Form.Group controlId="formMandal">
+                <Form.Group >
                         <Form.Label>Mandal</Form.Label>
                         <Form.Control placeholder = "Mandal" onChange = {handelChange} value = {formObj.mandal} id = "mandal"></Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="formDistrict">
+                    <Form.Group >
                         <Form.Label>District</Form.Label>
                         <Form.Control placeholder = "District" onChange = {handelChange} value = {formObj.district} id = "district"></Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="formCity">
+                    <Form.Group >
                         <Form.Label>City</Form.Label>
                         <Form.Control placeholder = "City" onChange = {handelChange} value = {formObj.city} id = "city"></Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="formState">
+                    <Form.Group >
                         <Form.Label>State</Form.Label>
                         <Form.Control placeholder = "State" onChange = {handelChange} value = {formObj.state} id = "state"></Form.Control>
                     </Form.Group>
-                    <Form.Group  controlId="formZipcode">
+                    <Form.Group >
                         <Form.Label>ZipCode</Form.Label>
                         <Form.Control placeholder = "ZipCode" onChange = {handelChange} value = {formObj.zipcode} id = "zipcode"></Form.Control>
                     </Form.Group>
                 </Form.Row>
                 <hr></hr>
                 <Form.Row>
-                    <Form.Group  controlId="formCustomerId">
+                    <Form.Group >
                         <Form.Label>CustomerId/SerialNumber</Form.Label>
                         <Form.Control placeholder = "CustomerId/SerialNumber" onChange = {handelChange} value = {formObj.customerId} id = "customerId"></Form.Control>
                     </Form.Group>
-                    <Form.Group  controlId="formPlans">
+                    <Form.Group >
                         <Form.Label>Plans</Form.Label>
                         <Form.Control as="select" defaultValue = "Starter" onChange = {handelChange} value = {formObj.customerplan} id = "customerplan">
                         <option>Starter</option>
                         <option>Advance</option>
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group  controlId="formDues">
+                    <Form.Group >
                         <Form.Label>Amount Due</Form.Label>
                         <Form.Control placeholder = "Intial Due" onChange = {handelChange} value = {formObj.amountdue} id = "amountdue"></Form.Control>
                     </Form.Group>

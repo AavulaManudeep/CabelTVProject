@@ -48,7 +48,7 @@ function Signin(props) {
             password :state.passcode,
             //confirmpassword:state.confirmpassword
         }
-       axios.post('http://ec2-18-222-133-226.us-east-2.compute.amazonaws.com:8089/controller/login',payload)
+       axios.post('http://localhost:8089/controller/login',payload)
        .then(response=>
         {
             console.log(response.headers['Authorization'])
@@ -91,6 +91,7 @@ function Signin(props) {
                 <button type="submit" disabled ={false}>Signin</button>
                 <button type="reset" value="reset" className="buttonpadding" onClick={onreset}>Reset</button>
             </form>
+            
         </div>
     )
 }
