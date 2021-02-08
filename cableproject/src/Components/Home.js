@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import {Doughnut} from 'react-chartjs-2';
 import {withRouter} from 'react-router-dom'
 import {Container, Row, Col,} from 'react-bootstrap';
@@ -7,6 +7,16 @@ import CustomerDetailEntryForm from './CustomerComponents/CustomerDetailEntryFor
 
 function Home(props) {
   console.log(props)
+  const [total_due,setTotalDue] = useState(0);
+
+  const dueAmount=(value)=>
+  {
+      setTotalDue(value)
+  }
+  // useEffect(()=>{
+  //   dueAmount(0);
+  // },[]
+  // )
   const state = {
     labels:["To be collected ","Collected"],
     datasets :[{
@@ -21,7 +31,7 @@ function Home(props) {
       '#501800',
       '#175000',
       ],
-      data: [50,30]
+      data: [total_due,30]
     }]
   }
   const state2 = {
@@ -95,8 +105,9 @@ function Home(props) {
           />
             </Col>
           </Row>
+          {console.log(total_due)}
           </Container>
-          <CustomerPlandetails props = {props}></CustomerPlandetails>
+          <CustomerPlandetails props = {props} dueAmount = {dueAmount}></CustomerPlandetails>
         </div>
     )
 }

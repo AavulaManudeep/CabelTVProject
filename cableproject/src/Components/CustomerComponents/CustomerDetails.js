@@ -9,11 +9,13 @@ import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import { Col,Row } from 'react-bootstrap'
 import testImg from '../../logo.svg'
+import axios from 'axios'
 function CustomerDetails(props) {
     var userData = props.userData
     const [disable,setDisable]= useState("disable")
     const [formObj, setfromObj] = useState(
         {
+            id:userData.userAddress!==undefined?userData.userAddress.id:"",
             firstName:userData.firstName,
             lastName:userData.lastName,
             address:userData.userAddress!==undefined?userData.userAddress.address1:"",
@@ -37,6 +39,7 @@ function CustomerDetails(props) {
         {
             setfromObj({
                 firstName:userData.firstName,
+                id:userData.userAddress!==undefined?userData.userAddress.id:"",
                 lastName:userData.lastName,
                 address:userData.userAddress!==undefined?userData.userAddress.address1:"",
                 phonenumber:"123456789",
@@ -61,7 +64,41 @@ function CustomerDetails(props) {
     
     const onFormSubmit = (e)=>
     {
+        e.preventDefault()
+        var UserDetails ={
+            customerId: formObj.customerId,
+            firstName: formObj.firstName,
+            lastName: formObj.lastName,
+            userAddress: {
+                id: formObj.id,
+                address1: formObj.address,
+                address2: formObj.address2,
+                aptno: formObj.aptno,
+                zipcode: formObj.zipcode,
+                mandal: formObj.mandal,
+                district: formObj.district,
+                state: formObj.state
+            },
+            userPlanDetailsVO: {
+                planId: formObj.id,
+                planName: formObj.customerplan,
+                price: formObj.amountdue
+            }
+        }
+        console.log(UserDetails);
+        axios.post("http://localhost:8087/customerprofile/updateuserdetails",UserDetails)
+        .then(response =>
+            {
+                if(response.data === "Success")
+                 {
+                     console.log(response.data)
+                 }
+            }).catch( error =>
+                {
+                    console.log(error)
+                })
 
+        
     }
     const handelChange = (e)=>
     {
@@ -100,12 +137,8 @@ function CustomerDetails(props) {
             <Card.Title>{formObj.firstName} {formObj.lastName}</Card.Title>
             <Card.Title>{formObj.phonenumber}</Card.Title>
             <Card.Title>{formObj.emailId}</Card.Title>  
-            <Card.Title>Address</Card.Title> 
-            <Card.Title>city,State,Zipcode</Card.Title> 
-            <Card.Title>jf</Card.Title>   
-            <Card.Title>Address</Card.Title> 
-            <Card.Title>city,State,Zipcode</Card.Title> 
-            <Card.Title>jf</Card.Title>    
+            <Card.Title>{formObj.address+" "+formObj.address}</Card.Title> 
+            <Card.Title>{formObj.city,formObj.state,formObj.zipcode}</Card.Title>    
         </Card.Body>
         </Card>       
                 </Col>

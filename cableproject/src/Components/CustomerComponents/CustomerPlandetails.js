@@ -6,13 +6,10 @@ import filterFactory,{textFilter} from 'react-bootstrap-table2-filter'
 import"./CustomerDetails.css"
 import PropTypes from 'prop-types'
 
-const CustomerPlandetails=({props}) => {
+const CustomerPlandetails=({props,dueAmount}) => {
     const [state,setState] = useState(
         {userDetails:[]})
     
-    const contextTypes = {
-        router: PropTypes.object
-    }
    let ref = useRef(state)
     useEffect(()=>{  
     axios.get("http://localhost:8089/customerinfo/retrieveall",{headers:
@@ -26,6 +23,15 @@ const CustomerPlandetails=({props}) => {
                     const userinfo = Object.assign([], response.data)
                     setState({userDetails:userinfo})
                     ref.current.due_amount = response.data[0].amountDue;
+                    var total_due=0;
+                    userinfo.map(cus => {if(cus.userPlanDetailsVO.price > 0)
+                    {total_due =total_due+cus.userPlanDetailsVO.price;
+                    console.log(typeof(cus.amountDue))}
+                    
+                })
+                console.log(total_due)
+                console.log(dueAmount)
+                    dueAmount(total_due);
                 }
             }
             ).catch(error=>
@@ -40,8 +46,8 @@ const CustomerPlandetails=({props}) => {
     [
         {dataField:"customerId",text:"Customer ID",sort:true,filter:textFilter()},
         {dataField:"customerFirstName",text:"Name",sort:true},
-        {dataField:"customerCurrentPlan",text:"Current Plan",sort:true},
-        {dataField:"amountDue",text:"Due Amount",sort:true}
+        {dataField:"userPlanDetailsVO.planName",text:"Current Plan",sort:true},
+        {dataField:"userPlanDetailsVO.price",text:"Due Amount",sort:true}
     ]
 
     // const getCustomerData = ()=>
